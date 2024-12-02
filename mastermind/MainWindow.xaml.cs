@@ -21,6 +21,9 @@ namespace mastermind
     public partial class MainWindow : Window
     {
 
+
+        string[,] highScores = new string[15, 3]; // 4 rijen en 2 kolommen
+
         bool codeCracked = false;
 
 
@@ -106,6 +109,8 @@ namespace mastermind
 
         private void StartAgain()
         {
+
+            //highScores.Cast(name, attempts, playerScore);
             if(attempts == 10)
             {
                 MessageBox.Show($"You failed! De corecte code was " + string.Join(", ", secretCode) + ".\nNog eens proberen?", "FAILED", MessageBoxButton.OK, MessageBoxImage.Question);
@@ -591,7 +596,47 @@ namespace mastermind
 
         private void newGameMenu_Click(object sender, RoutedEventArgs e)
         {
-            StartAgain();
+            StartAgain2();
+
+        }
+
+
+        private void StartAgain2()
+        {
+            if (attempts == 10)
+            {
+                MessageBoxResult endGame = MessageBox.Show($"Weet je zeker dat je opnieuw wilt beginnen?", "Opnieuw beginnen", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (endGame == MessageBoxResult.Yes)
+                {
+                    secretCode.Clear();
+                    label1.Background = System.Windows.Media.Brushes.White;
+                    label1.BorderBrush = System.Windows.Media.Brushes.White;
+                    label2.Background = System.Windows.Media.Brushes.White;
+                    label2.BorderBrush = System.Windows.Media.Brushes.White;
+                    label3.Background = System.Windows.Media.Brushes.White;
+                    label3.BorderBrush = System.Windows.Media.Brushes.White;
+                    label4.Background = System.Windows.Media.Brushes.White;
+                    label4.BorderBrush = System.Windows.Media.Brushes.White;
+                    comboBox1.SelectedItem = -1;
+                    comboBox2.SelectedItem = -1;
+                    comboBox3.SelectedItem = -1;
+                    comboBox4.SelectedItem = -1;
+                    attemptsListBox.Items.Clear();
+                    GenerateRandomCode();
+                    secretCodeTextBox.Text = "Mastermind oplossing: " + string.Join(", ", secretCode);
+                    attempts = 0;
+                    playerScore = 100;
+                    playerScoreTextBox.Text = $"Score: {playerScore}/100";
+                    StartCountdown();
+                    this.Title = $"Mastermind - poging {attempts}/10";
+                    codeCracked = false;
+
+                }
+                else
+                {
+                    Application.Current.Shutdown();
+                }
+            }
 
         }
 
@@ -600,7 +645,7 @@ namespace mastermind
 
         private void highScoreMenu_Click(object sender, RoutedEventArgs e)
         {
-           
+           MessageBox.Show(highScores.Clone().ToString());
 
         }
 
@@ -637,6 +682,9 @@ namespace mastermind
             StartAgain();
 
         }
+
+
+
 
 
     }
