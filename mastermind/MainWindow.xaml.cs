@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using Microsoft.VisualBasic;
+using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using System.Windows;
@@ -29,6 +30,7 @@ namespace mastermind
         int playerScore = 100;
 
 
+        string name;
 
 
 
@@ -65,6 +67,7 @@ namespace mastermind
             InitializeComponent();
             VulComboBoxen(); // Vul de comboboxen met de kleuren
             GenerateRandomCode(); // Genereer en toon de random code in de titel
+            StartGame();
             // Voeg een globale toetsencombinatie toe voor Ctrl+F12
             this.KeyDown += MainWindow_KeyDown;
 
@@ -90,7 +93,16 @@ namespace mastermind
             StartCountdown();
         }
 
-
+        private void StartGame()
+        {
+            string antwoord = Interaction.InputBox("Geef je naam", "naam", "50", 500);
+            while (string.IsNullOrEmpty(antwoord))
+            {
+                MessageBox.Show("Geef je naam!", "Foutieve invoer");
+                antwoord = Interaction.InputBox("Geef je naam", "Invoer", "50", 500);
+            }
+            name = antwoord.ToLower();
+        }
 
         private void StartAgain()
         {
@@ -492,7 +504,7 @@ namespace mastermind
 
 
 
-        private void
+
 
 
 
