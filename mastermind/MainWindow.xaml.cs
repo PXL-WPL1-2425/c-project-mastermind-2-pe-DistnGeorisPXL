@@ -108,71 +108,11 @@ namespace mastermind
         {
             if(attempts == 10)
             {
-                MessageBoxResult endGame = MessageBox.Show($"You failed! De corecte code was " + string.Join(", ", secretCode) + ".\nNog eens proberen?", "FAILED", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if(endGame == MessageBoxResult.Yes)
-                {
-                    secretCode.Clear();
-                    label1.Background = System.Windows.Media.Brushes.White;
-                    label1.BorderBrush = System.Windows.Media.Brushes.White;
-                    label2.Background = System.Windows.Media.Brushes.White;
-                    label2.BorderBrush = System.Windows.Media.Brushes.White;
-                    label3.Background = System.Windows.Media.Brushes.White;
-                    label3.BorderBrush = System.Windows.Media.Brushes.White;
-                    label4.Background = System.Windows.Media.Brushes.White;
-                    label4.BorderBrush = System.Windows.Media.Brushes.White;
-                    comboBox1.SelectedItem = -1;
-                    comboBox2.SelectedItem = -1;
-                    comboBox3.SelectedItem = -1;
-                    comboBox4.SelectedItem = -1;
-                    attemptsListBox.Items.Clear();
-                    GenerateRandomCode();
-                    secretCodeTextBox.Text = "Mastermind oplossing: " + string.Join(", ", secretCode);
-                    attempts = 0;
-                    playerScore = 100;
-                    playerScoreTextBox.Text = $"Score: {playerScore}/100";
-                    StartCountdown();
-                    this.Title = $"Mastermind - poging {attempts}/10";
-                    codeCracked = false;
-
-                }
-                else
-                {
-                    Application.Current.Shutdown();
-                }
+                MessageBox.Show($"You failed! De corecte code was " + string.Join(", ", secretCode) + ".\nNog eens proberen?", "FAILED", MessageBoxButton.OK, MessageBoxImage.Question);
             }
             if (codeCracked == true)
             {
-                MessageBoxResult endGame = MessageBox.Show($"Code gekraakt in {attempts} pogingen.\nNog eens proberen?", "WON", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (endGame == MessageBoxResult.Yes)
-                {
-                    secretCode.Clear();
-                    label1.Background = System.Windows.Media.Brushes.White;
-                    label1.BorderBrush = System.Windows.Media.Brushes.White;
-                    label2.Background = System.Windows.Media.Brushes.White;
-                    label2.BorderBrush = System.Windows.Media.Brushes.White;
-                    label3.Background = System.Windows.Media.Brushes.White;
-                    label3.BorderBrush = System.Windows.Media.Brushes.White;
-                    label4.Background = System.Windows.Media.Brushes.White;
-                    label4.BorderBrush = System.Windows.Media.Brushes.White;
-                    comboBox1.SelectedItem = -1;
-                    comboBox2.SelectedItem = -1;
-                    comboBox3.SelectedItem = -1;
-                    comboBox4.SelectedItem = -1;
-                    attemptsListBox.Items.Clear();
-                    GenerateRandomCode();
-                    secretCodeTextBox.Text = "Mastermind oplossing: " + string.Join(", ", secretCode);
-                    attempts = 0;
-                    playerScore = 100;
-                    playerScoreTextBox.Text = $"Score: {playerScore}/100";
-                    StartCountdown();
-                    this.Title = $"Mastermind - poging {attempts}/10";
-                    codeCracked = false;
-
-                }
-                else
-                {
-                    Application.Current.Shutdown();
-                }
+                MessageBoxResult endGame = MessageBox.Show($"Code gekraakt in {attempts} pogingen.\nNog eens proberen?", "WON", MessageBoxButton.OK, MessageBoxImage.Question);
             }
 
         }
