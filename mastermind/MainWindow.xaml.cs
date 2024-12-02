@@ -35,7 +35,7 @@ namespace mastermind
 
         string name;
 
-
+        string maxtrys = "10";
 
         private bool _isDebugMode = false;
 
@@ -679,7 +679,13 @@ namespace mastermind
 
         private void numberOfAttemptsMenu_Click(object sender, RoutedEventArgs e)
         {
-            StartAgain();
+            string numberOfAttempts = Interaction.InputBox($"Huidige max pogingen: {maxtrys}", "pogingen", "10", 500);
+            while (string.IsNullOrEmpty(numberOfAttempts))
+            {
+                MessageBox.Show("Geef een nummber!", "Foutieve invoer");
+                numberOfAttempts = Interaction.InputBox("Geef een nummber", "pogingen", "10", 500);
+            }
+            maxtrys = numberOfAttempts;
 
         }
 
